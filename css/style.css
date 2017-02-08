@@ -21,11 +21,14 @@ body, html{
     height: 50px;
     background-color: lemonchiffon;
     display: block;
+    z-index: 99;
 }
 .fpl-content{
     overflow: hidden;
 }
-
+.layer{
+    width: 100%;
+}
 .fpl-next {
     position: absolute;
     left: 0px;
