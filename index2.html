@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>layer test</title>
+    <link rel="stylesheet" href="css/jquery.fullpage.css">
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="jquery.fullPage.js"></script>
+
+    <style type="text/css">
+        body{
+            background: url("images/mainbg.jpg") no-repeat center center;
+
+        }
+        h1 {
+            margin: 0px auto;
+            text-align: center;
+        }
+
+        h1.text-right{
+            text-align: right;
+        }
+        h1.text-left{
+            text-align: left;
+        }
+        .seen{
+            position: fixed;
+            top: 0px;
+            left: 0px;
+        }
+        .section.active {
+            margin-top: 0px;
+        }
+    </style>
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+
+            $('#fullpage').fullpage({
+                afterRender: function () {
+
+
+                    console.log();
+                    var section_height = $(".section:first").height();
+//                    $(".section:first").css("margin-bottom", section_height)
+
+//                    $(".section").not(".active").each(function(i,e){
+//                        console.log(i);
+//                        $(e).css({
+//                            'margin-top' : section_height
+//                        });
+//                    });
+                },
+                
+                afterLoad: function(anchorLink, index){ //fourth, 4
+                    var loadedSection = $(this);
+                    console.log("LOADDDDDDDDD");
+                    loadedSection.addClass("seen");
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+
+    <div id="fullpage">
+        <div class="section">
+            <h1 class="text-left">First</h1>
+        </div>
+        <div class="section">
+            <h1>Second</h1>
+        </div>
+        <div class="section">
+            <h1 class="text-right">3rd</h1>
+        </div>
+    </div>
+
+</body>
+</html>

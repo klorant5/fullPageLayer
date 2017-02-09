@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>TEST</title>
+</head>
+<style type="text/css">
+    body, html{
+        height: 100%;
+        margin: 0px;
+        padding: 0px;
+    }
+    body {
+        background-color: #bada55;
+
+    }
+</style>
+
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+
+<script type="text/javascript">
+    jQuery(document).ready(function ($) {
+        var called = false;
+        $('body').on( 'DOMMouseScroll mousewheel', function ( event ) {
+            if( event.originalEvent.detail > 0 || event.originalEvent.wheelDelta < 0 ) { //alternative options for wheelData: wheelDeltaX & wheelDeltaY
+                //scroll down
+                if(!called){
+                    called = true;
+
+                    var t = setTimeout(function () {
+                        console.log('Down');
+
+                        called = false;
+
+                    }, 200);
+
+
+                }
+            } else {
+                //scroll up
+                console.log('Up');
+            }
+//            clearTimeout(t);
+            //prevent page fom scrolling
+            return false;
+        });
+    });
+</script>
+<body>
+
+</body>
+</html>

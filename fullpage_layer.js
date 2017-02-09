@@ -46,7 +46,7 @@ jQuery(document).ready(function($){
             $pluginContent.append($("<a>").addClass(SLIDE_NEXT));
             $pluginContent.append($("<a>").addClass(SLIDE_PREV));
             $pluginContent.css({
-                height : '100.0001%',
+                height : '101%',
                 overflow: 'auto',
                 width: '101%',
                 position : 'relative'
@@ -69,46 +69,84 @@ jQuery(document).ready(function($){
 
             //scroll
             var called = false;
-            $("."+CONTENT_CLASS).scroll(function(e) {
-                e.preventDefault();
-                if(!called){
+            $('body').on( 'DOMMouseScroll mousewheel', function ( event ) {
+                if( event.originalEvent.detail > 0 || event.originalEvent.wheelDelta < 0 ) { //alternative options for wheelData: wheelDeltaX & wheelDeltaY
+                    //scroll down
+                    if(!called){
+                        called = true;
 
-                    called = true;
-                    next();
-                    var t = setTimeout(function(){
-                        called = false;
-                    }, 700);
-                    clearTimeout(t);
-                    // console.log(e);
+                        var t = setTimeout(function () {
+                            console.log('Down');
+                            next();
+                            called = false;
+                        }, 200);
 
+                    }
+                } else {
+                    //scroll up
+                    if(!called){
+                        called = true;
+
+                        var t = setTimeout(function () {
+                            console.log('Up');
+                            called = false;
+                        }, 200);
+
+                    }
                 }
 
+                //prevent page fom scrolling
                 return false;
             });
+
+            // $("body,."+CONTENT_CLASS).scroll(function(e) {
+            //     e.preventDefault();
+                // if(!called){
+                //
+                //     called = true;
+                //     next();
+                //     var t = setTimeout(function(){
+                //         next();
+                //     }, 200);
+                //     clearTimeout(t);
+                //     // console.log(e);
+                //
+                // }
+                // next();
+// console.log("scroll");
+//                 return false;
+//             });
 
             $(".fpl-slide-next").on("click", function(i,e){
 
                 // next();
             });
         }
-        
+        var $called = false;
         function next(){
-            console.log("next");
-            
-            var nextLayerIndex = $currentLayerIndex + 1;
-            var nextLayer = $(".layer:nth-child("+nextLayerIndex+")");
-            var currentLayer = $(".layer:nth-child("+$currentLayerIndex+")");
-            // console.log(nextLayer);
-            
-            currentLayer.removeClass("active");
-            
-            nextLayer.addClass("active");
-            
-            nextLayer.animate({
-                top: '0px'
-            }, 700);
-            
-            $currentLayerIndex += 1;
+            if(!$called) {
+                $called = !$called;
+                console.log("next");
+
+                var nextLayerIndex = $currentLayerIndex + 1;
+                var nextLayer = $(".layer:nth-child(" + nextLayerIndex + ")");
+                var currentLayer = $(".layer:nth-child(" + $currentLayerIndex + ")");
+                // console.log(nextLayer);
+
+                currentLayer.removeClass("active");
+
+                nextLayer.addClass("active");
+
+                nextLayer.animate({
+                    top: '0px'
+                }, 700, 'swing', function () {
+                    //complete
+
+                    $currentLayerIndex += 1;
+                    $called = !$called;
+                });
+
+            }
         }
         
  
