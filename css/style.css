@@ -38,3 +38,35 @@ body{
     position: absolute;
     left: 0px;
 }
+.slide {
+    background-size: cover;
+    position: relative;
+}
+.slide.first {
+    background: url("../images/layer1.png") no-repeat left top;
+}
+.slide.second {
+    background: url("../images/layer2.png") no-repeat left top;
+}
+.slide.laptop1 {
+    background: url("../images/laptop1.png") no-repeat left top;
+}
+.slide.laptop2 {
+    background: url("../images/laptop2.png") no-repeat left top;
+}
+.slide .product-info{
+    display: none;
+}
+.layer.active .slide .product-info{
+    display: block;
+}
+.slide.second .product-info,
+.slide.first .product-info,
+.slide.laptop1 .product-info,
+.slide.laptop2 .product-info{
+    position: absolute;
+    bottom: 46px;
+    right: 299px;
+    width: 276px;
+    height: 200px;
+}
